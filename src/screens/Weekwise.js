@@ -59,6 +59,8 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
     });
   });
 
+  // removing duplicates from array colors
+
   const newColors = [];
   colors.forEach((c) => {
     if (!newColors.includes(c)) {
@@ -78,8 +80,6 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
       return `hidden`;
     }
   };
-
-  // removing duplicates from array colors
 
   const days = ["S", "M", "T", "W", "T", "F", "S"];
 
