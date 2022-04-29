@@ -45,6 +45,8 @@ const Day = ({ day, month, tasks, date }) => {
       return itemm;
     });
 
+  console.log(date.getDate());
+
   return (
     <>
       <div
@@ -68,21 +70,20 @@ const Day = ({ day, month, tasks, date }) => {
                   <div
                     className={`${
                       item?.workingDays[0] === date.toLocaleDateString()
-                        ? `bg-${newColors[index]} visible pl-1 flex `
-                        : `bg-${newColors[index]} pl-1 flex justify-center`
+                        ? `bg-${newColors[index]} visible pl-1 flex flex-wrap justify-center text-center`
+                        : `bg-${newColors[index]} pl-1 flex justify-center text-center`
                     }]`}
                     key={index}
                   >
-                    {console.log(`bg-${newColors[index]}`)}
                     <p className="font-bold">
                       {item?.workingDays[0] === date.toLocaleDateString()
                         ? item?.empName
-                        : ""}{" "}
+                        : ""}
                     </p>
                     <p className="mx-1 font-bold">
                       {item?.workingDays[0] === date.toLocaleDateString()
                         ? ":"
-                        : ""}{" "}
+                        : ""}
                     </p>
 
                     {item?.name}

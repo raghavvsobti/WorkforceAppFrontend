@@ -245,13 +245,13 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
               );
             })}
 
-          {colors.map((item, index) => {
+          {/* {colors.map((item, index) => {
             return (
               <div key={index} className={`bg-${newColors[index]} w-64 h-64`}>
                 <p>Hello {index}</p>
               </div>
             );
-          })}
+          })} */}
 
           <div className="col-span-[0.5]"></div>
         </div>
