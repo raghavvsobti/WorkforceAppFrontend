@@ -70,9 +70,11 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
 
   console.log(newColors);
 
+  // var indexOfColors = Math.floor(Math.random() * 36);
+
   const checkerFunction = (item, dateItem, index) => {
     console.log("color check", newColors[index], index);
-    console.log("bg-", newColors[index]);
+    console.log(`bg-${newColors[index]}`);
     if (item?.workingDays?.find((el) => el === dateItem.toLocaleDateString())) {
       return `bg-${newColors[index]} text-transparent block`;
       // return `bg-green-300 text-transparent`;
@@ -242,6 +244,14 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
                 </React.Fragment>
               );
             })}
+
+          {colors.map((item, index) => {
+            return (
+              <div key={index} className={`bg-${newColors[index]} w-64 h-64`}>
+                <p>Hello {index}</p>
+              </div>
+            );
+          })}
 
           <div className="col-span-[0.5]"></div>
         </div>

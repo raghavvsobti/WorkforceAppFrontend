@@ -15,7 +15,6 @@ const Day = ({ day, month, tasks, date }) => {
     }
   });
 
-  console.log(newColors);
   console.log(colors);
 
   const getCurrentClass = () => {
@@ -69,13 +68,12 @@ const Day = ({ day, month, tasks, date }) => {
                   <div
                     className={`${
                       item?.workingDays[0] === date.toLocaleDateString()
-                        ? `bg-${newColors[item?.index]} visible pl-1 flex`
-                        : `bg-${
-                            newColors[item?.index]
-                          } pl-1 flex justify-center`
-                    }`}
+                        ? `bg-${newColors[index]} visible pl-1 flex `
+                        : `bg-${newColors[index]} pl-1 flex justify-center`
+                    }]`}
                     key={index}
                   >
+                    {console.log(`bg-${newColors[index]}`)}
                     <p className="font-bold">
                       {item?.workingDays[0] === date.toLocaleDateString()
                         ? item?.empName
