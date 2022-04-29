@@ -8,6 +8,16 @@ const Day = ({ day, month, tasks, date }) => {
     new Date().getDate()
   );
 
+  const newColors = [];
+  colors.forEach((c) => {
+    if (!newColors.includes(c)) {
+      newColors.push(c);
+    }
+  });
+
+  console.log(newColors);
+  console.log(colors);
+
   const getCurrentClass = () => {
     return day === new Date().getDate() && month === new Date().getMonth()
       ? "bg-black text-white rounded-full w-7"
@@ -59,8 +69,10 @@ const Day = ({ day, month, tasks, date }) => {
                   <div
                     className={`${
                       item?.workingDays[0] === date.toLocaleDateString()
-                        ? `bg-${colors[item?.index]} visible pl-1 flex`
-                        : `bg-${colors[item?.index]} pl-1 flex justify-center`
+                        ? `bg-${newColors[item?.index]} visible pl-1 flex`
+                        : `bg-${
+                            newColors[item?.index]
+                          } pl-1 flex justify-center`
                     }`}
                     key={index}
                   >

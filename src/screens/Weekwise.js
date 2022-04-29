@@ -59,20 +59,32 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
     });
   });
 
+  const newColors = [];
+  colors.forEach((c) => {
+    if (!newColors.includes(c)) {
+      newColors.push(c);
+    }
+  });
+
+  console.log(newColors);
+
   const checkerFunction = (item, dateItem, index) => {
-    console.log("bg-", colors[index]);
+    console.log("color check", newColors[index], index);
+    console.log("bg-", newColors[index]);
     if (item?.workingDays?.find((el) => el === dateItem.toLocaleDateString())) {
-      return `bg-${colors[index]} text-transparent block`;
+      return `bg-${newColors[index]} text-transparent block`;
       // return `bg-green-300 text-transparent`;
     } else {
       return `hidden`;
     }
   };
 
+  // removing duplicates from array colors
+
   const days = ["S", "M", "T", "W", "T", "F", "S"];
 
   return (
-    <div className="md:col-span-11 col-span-10 mt-[85px] relative">
+    <div className="md:col-span-11 col-span-10 mt-[85px] relative ">
       <div className="flex justify-between">
         <div className="flex flex-row justify-center">
           <p className="text-3xl ml-10">
@@ -157,7 +169,6 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
           {/* weekwise */}
           <div className="col-span-[0.5] "></div>
           {currentMonth.map((item, i) => {
-            // console.log("color check", colors[i], i);
             return (
               <div
                 key={generateKey(item[i] + i)}
@@ -180,14 +191,11 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
           {/* 2nd row ends here */}
           {/* here all the tasks array is getting mapped */}
           {taskList
-
-            ?.filter((item, index) =>
+            ?.filter((item) =>
               secondRowArray
                 ?.flat()
                 ?.some((itemm) => item?.workingDays?.includes(itemm))
             )
-
-            // ?.filter((item) => item?.status !== "Completed")
             ?.map((item, index) => {
               return (
                 <React.Fragment key={generateKey(item.id + Math.random())}>
