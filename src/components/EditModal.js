@@ -17,9 +17,10 @@ const EditModal = ({ id }) => {
   };
 
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   const deleteEntry = async () => {
-    await fetch(`http://localhost:8000/task/${id}`, {
+    await fetch(`http://localhost:8000/task/${userId}/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

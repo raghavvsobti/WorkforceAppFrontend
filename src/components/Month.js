@@ -6,9 +6,9 @@ const Month = ({ month }) => {
   const [taskList, setTaskList] = useState([]);
 
   const token = localStorage.getItem("token");
-
+  const userId = localStorage.getItem("userId");
   const fetchCreatedTasks = async () => {
-    await fetch("http://localhost:8000/task/all", {
+    await fetch(`http://localhost:8000/task/all/${userId}`, {
       credentials: "include",
       headers: {
         Authorization: `${token}`,

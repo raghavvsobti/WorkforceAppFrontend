@@ -83,8 +83,9 @@ const Tasks = () => {
   ];
 
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
   const fetchCreatedTasks = async () => {
-    await fetch("http://localhost:8000/task/all", {
+    await fetch(`http://localhost:8000/task/all/${userId}`, {
       credentials: "include",
       headers: {
         Authorization: `${token}`,
@@ -115,6 +116,8 @@ const Tasks = () => {
     status: "",
     empName: "",
   });
+
+  console.log(taskList);
 
   // useMemo is used to only calculate a value when dependencies change.
   // Here, the value of filteredList is recalculated when either of the variables filters, employee name, status,startDate, endDate change

@@ -39,6 +39,7 @@ const TaskForm = () => {
   ];
 
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   const submitHandler = async (e) => {
     // console.log(name, description, empName, startDate, endDate);
@@ -56,6 +57,7 @@ const TaskForm = () => {
         description: description.toString(),
         startDate: startDate,
         endDate: endDate,
+        userId: userId,
         status: "Pending",
       }),
     })
