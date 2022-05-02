@@ -38,6 +38,8 @@ const TaskForm = () => {
     },
   ];
 
+  const token = localStorage.getItem("token");
+
   const submitHandler = async (e) => {
     // console.log(name, description, empName, startDate, endDate);
     e.preventDefault();
@@ -45,6 +47,7 @@ const TaskForm = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${token}`,
       },
       credentials: "include",
       body: JSON.stringify({

@@ -32,6 +32,7 @@ const Login = ({ mode, setMode }) => {
           console.log("Success", data);
           localStorage.setItem("token", data.jwt);
           localStorage.setItem("user", data.user?.name);
+          localStorage.setItem("userId", data.user?._id);
           setUser(data.user);
           setIsLoggedIn(true);
           navigate("/workforce");

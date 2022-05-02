@@ -16,11 +16,14 @@ const EditModal = ({ id }) => {
     deleteEntry();
   };
 
+  const token = localStorage.getItem("token");
+
   const deleteEntry = async () => {
     await fetch(`http://localhost:8000/task/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${token}`,
       },
       credentials: "include",
     })
@@ -36,6 +39,7 @@ const EditModal = ({ id }) => {
   const fetchCreatedTask = async () => {
     await fetch(`http://localhost:8000/task/${id}`, {
       credentials: "include",
+      headers: { Authorization: `${token}` },
     }).then((response) =>
       response
         .json()

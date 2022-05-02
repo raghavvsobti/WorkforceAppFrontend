@@ -21,9 +21,10 @@ const Notes = () => {
   const [notesList, setNotesList] = useState(null);
 
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   const fetchCreatedNotes = async () => {
-    await fetch("http://localhost:8000/note/all", {
+    await fetch(`http://localhost:8000/note/all/${userId}`, {
       credentials: "include",
       headers: {
         Authorization: `${token}`,
@@ -49,6 +50,8 @@ const Notes = () => {
     fetchCreatedNotes();
     // eslint-disable-next-line
   }, []);
+
+  console.log(notesList);
 
   return (
     <div>
@@ -100,7 +103,7 @@ const Notes = () => {
                 <Note
                   key={index}
                   title={note?.title}
-                  id={note?.id}
+                  id={note?._id}
                   description={note?.description}
                 />
               ))}

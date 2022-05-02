@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 const EditNote = () => {
   const navigate = useNavigate();
-  const { setEditNote, setSelectedNote, selectedNote } = UniversalState();
+  const { setEditNote, setSelectedNote, selectedNote, user } = UniversalState();
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [setNoteList] = useState(null);
+
+  const token = localStorage.getItem("token");
 
   const submitHandler = async (e) => {
     // console.log(name, description, empName, startDate, endDate);
@@ -16,11 +18,13 @@ const EditNote = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${token}`,
       },
       credentials: "include",
       body: JSON.stringify({
         title: title,
         description: description,
+        userId: user?._id,
       }),
     })
       .then((response) => {
@@ -36,6 +40,7 @@ const EditNote = () => {
   const fetchCreatedNote = async () => {
     await fetch(`http://localhost:8000/note/${selectedNote?.id}`, {
       credentials: "include",
+      headers: { Authorization: `${token}` },
     }).then((response) =>
       response
         .json()
@@ -60,11 +65,14 @@ const EditNote = () => {
     deleteEntry();
   };
 
+  const userId = localStorage.getItem("userId");
+
   const deleteEntry = async () => {
-    await fetch(`http://localhost:8000/note/${selectedNote?.id}`, {
+    await fetch(`http://localhost:8000/note/${userId}/${selectedNote?.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${token}`,
       },
       credentials: "include",
     })

@@ -8,6 +8,11 @@ const CreateNote = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  const token = localStorage.getItem("token");
+
+  const userId = localStorage.getItem("userId");
+  console.log(userId);
+
   const submitHandler = async (e) => {
     // console.log(name, description, empName, startDate, endDate);
     e.preventDefault();
@@ -15,11 +20,13 @@ const CreateNote = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${token}`,
       },
       credentials: "include",
       body: JSON.stringify({
         title: title,
         description: description,
+        userId: userId,
       }),
     })
       .then((response) => {
