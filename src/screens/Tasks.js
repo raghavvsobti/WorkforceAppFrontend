@@ -15,6 +15,7 @@ const Tasks = () => {
     setOpenModal,
     editModal,
     userModal,
+    // isLoggedIn,
     // isFetching,
     // setIsFetching,
   } = UniversalState();
@@ -81,9 +82,13 @@ const Tasks = () => {
     },
   ];
 
+  const token = localStorage.getItem("token");
   const fetchCreatedTasks = async () => {
     await fetch("http://localhost:8000/task/all", {
       credentials: "include",
+      headers: {
+        Authorization: `${token}`,
+      },
     }).then((response) =>
       response
         .json()
@@ -103,6 +108,7 @@ const Tasks = () => {
 
   useEffect(() => {
     fetchCreatedTasks();
+    // eslint-disable-next-line
   }, []);
 
   const [filters, setFilters] = useState({

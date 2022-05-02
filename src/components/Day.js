@@ -46,6 +46,7 @@ const Day = ({ day, month, tasks, date }) => {
     });
 
   console.log(date.getDate());
+  console.log(tasks);
 
   return (
     <>
@@ -75,6 +76,7 @@ const Day = ({ day, month, tasks, date }) => {
                     }]`}
                     key={index}
                   >
+                    {console.log(tasks?.index)}
                     <p className="font-bold">
                       {item?.workingDays[0] === date.toLocaleDateString()
                         ? item?.empName

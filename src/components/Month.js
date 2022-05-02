@@ -5,9 +5,14 @@ import DayNames from "./DayNames";
 const Month = ({ month }) => {
   const [taskList, setTaskList] = useState([]);
 
+  const token = localStorage.getItem("token");
+
   const fetchCreatedTasks = async () => {
     await fetch("http://localhost:8000/task/all", {
       credentials: "include",
+      headers: {
+        Authorization: `${token}`,
+      },
     }).then((response) =>
       response
         .json()
@@ -27,6 +32,7 @@ const Month = ({ month }) => {
 
   useEffect(() => {
     fetchCreatedTasks();
+    // eslint-disable-next-line
   }, []);
 
   return (

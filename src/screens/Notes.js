@@ -9,14 +9,25 @@ import TaskForm from "../components/TaskForm";
 import { UniversalState } from "../context/StateProvider";
 
 const Notes = () => {
-  const { taskModal, noteModal, setNoteModal, editNote, userModal } =
-    UniversalState();
+  const {
+    taskModal,
+    noteModal,
+    setNoteModal,
+    editNote,
+    userModal,
+    // isLoggedIn,
+  } = UniversalState();
 
   const [notesList, setNotesList] = useState(null);
+
+  const token = localStorage.getItem("token");
 
   const fetchCreatedNotes = async () => {
     await fetch("http://localhost:8000/note/all", {
       credentials: "include",
+      headers: {
+        Authorization: `${token}`,
+      },
     }).then((response) =>
       response
         .json()
@@ -36,7 +47,8 @@ const Notes = () => {
 
   useEffect(() => {
     fetchCreatedNotes();
-  }, [notesList]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div>

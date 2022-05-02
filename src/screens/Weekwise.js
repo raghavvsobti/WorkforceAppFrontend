@@ -5,9 +5,13 @@ import { colors } from "../utils/colors";
 const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
   const [taskList, setTaskList] = useState([]);
 
+  const token = localStorage.getItem("token");
   const fetchCreatedTasks = async () => {
     await fetch("http://localhost:8000/task/all", {
       credentials: "include",
+      headers: {
+        Authorization: `${token}`,
+      },
     }).then((response) =>
       response
         .json()
@@ -28,9 +32,9 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
 
   useEffect(() => {
     fetchCreatedTasks();
-  }, [monthIndex]);
 
-  // eslint-disable-next-line
+    // eslint-disable-next-line
+  }, [monthIndex]);
 
   function getFormat(today) {
     var dd = today.getDate();
