@@ -123,14 +123,16 @@ const EditModal = ({ id }) => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${token}`,
       },
+
       credentials: "include",
       body: JSON.stringify({
         name: name,
         empName: empName,
         description: description,
-        startDate: startDate,
-        endDate: endDate,
+        startDate: startDate || taskList?.startDate.split("T")[0],
+        endDate: endDate || taskList?.endDate.split("T")[0],
         status: status,
       }),
     })

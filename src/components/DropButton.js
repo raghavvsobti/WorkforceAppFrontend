@@ -10,11 +10,13 @@ const DropButton = () => {
     UniversalState();
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token");
   const logoutHandler = async () => {
     await fetch("http://localhost:8000/auth/logout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${token}`,
       },
       credentials: "include",
     }).then((response) =>

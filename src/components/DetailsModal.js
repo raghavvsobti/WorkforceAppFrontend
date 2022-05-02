@@ -10,9 +10,13 @@ const DetailsModal = ({ id }) => {
     setEditModal(true);
   };
 
+  const token = localStorage.getItem("token");
   const fetchCreatedTask = async () => {
     await fetch(`http://localhost:8000/task/${id}`, {
       credentials: "include",
+      headers: {
+        Authorization: `${token}`,
+      },
     }).then((response) =>
       response
         .json()

@@ -7,7 +7,7 @@ const Login = ({ mode, setMode }) => {
   const navigate = useNavigate();
   const { user, setUser, isLoggedIn, setIsLoggedIn } = UniversalState();
 
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
 
   const submitForm = async (e) => {
     console.log(email, password);
@@ -16,7 +16,7 @@ const Login = ({ mode, setMode }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${token}`,
+        // Authorization: `${token}`,
       },
 
       credentials: "same-origin",
