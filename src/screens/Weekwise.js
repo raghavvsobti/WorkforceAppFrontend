@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Options from "../components/Options";
 import { weeklyMonthsArray } from "../utils/index";
-import { colors } from "../utils/colors";
 const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
   const [taskList, setTaskList] = useState([]);
 
@@ -21,6 +20,7 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
             data.map((item, index) => ({
               index: index + 1,
               ...item,
+              empName: item?.empName?.map((itemm, index) => itemm?.name),
             }))
           );
         })
@@ -63,29 +63,16 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
     });
   });
 
-  // removing duplicates from array colors
-
-  const newColors = [];
-  colors.forEach((c) => {
-    if (!newColors.includes(c)) {
-      newColors.push(c);
-    }
-  });
-
-  console.log(newColors);
-
-  // var indexOfColors = Math.floor(Math.random() * 36);
-
   const checkerFunction = (item, dateItem, index) => {
-    // console.log("color check", newColors[index], index);
     console.log(`${item.color}`);
     if (item?.workingDays?.find((el) => el === dateItem.toLocaleDateString())) {
       return `${item.color} text-transparent block`;
-      // return `bg-green-300 text-transparent`;
     } else {
       return `hidden`;
     }
   };
+
+  console.log(taskList);
 
   const days = ["S", "M", "T", "W", "T", "F", "S"];
 

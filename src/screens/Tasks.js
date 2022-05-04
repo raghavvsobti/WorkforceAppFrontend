@@ -103,6 +103,7 @@ const Tasks = () => {
             data.map((item, index) => ({
               index: index + 1,
               ...item,
+              empName: item.empName.map((item, index) => item.name),
             }))
           );
         })

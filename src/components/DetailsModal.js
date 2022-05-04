@@ -21,8 +21,6 @@ const DetailsModal = ({ id }) => {
       response
         .json()
         .then((data) => {
-          //   console.log(response);
-          //   console.log(data);
           setTaskList(data);
         })
         .catch((error) => {
@@ -37,6 +35,12 @@ const DetailsModal = ({ id }) => {
     }
     // eslint-disable-next-line
   }, [openModal]);
+
+  console.log(taskList);
+
+  const empName = taskList?.empName?.map((item, index) => item?.name);
+
+  console.log(empName);
 
   return (
     <>
@@ -56,7 +60,8 @@ const DetailsModal = ({ id }) => {
               <div className="grid grid-cols-3">
                 <p className="text-md font-semibold">Employee Name</p>
                 <p className="text-md text-center ">:</p>
-                <p className="text-md">{taskList?.empName.join(", ")}</p>
+
+                <p className="text-md">{empName?.join(", ")}</p>
               </div>
               <div className="grid grid-cols-3">
                 <p className="text-md font-semibold">Task Description</p>

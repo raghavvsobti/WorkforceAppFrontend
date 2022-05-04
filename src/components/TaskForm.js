@@ -79,7 +79,8 @@ const TaskForm = () => {
   };
 
   const selectHandler = (e) => {
-    setSelectedUser(Array.isArray(e) ? e.map((x) => x.value) : []);
+    setSelectedUser(Array.isArray(e) ? e.map((x) => x) : []);
+    console.log(selectedUser);
   };
 
   return (

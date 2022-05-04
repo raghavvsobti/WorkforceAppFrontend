@@ -82,7 +82,9 @@ const Day = ({ day, month, tasks, date }) => {
                   >
                     <p className="font-bold">
                       {itemm?.workingDays[0] === date.toLocaleDateString()
-                        ? itemm?.empName.join(", ")
+                        ? itemm?.empName
+                            ?.map((item2, index) => item2?.name)
+                            ?.join(", ")
                         : ""}
                     </p>
                     <p className="mx-1 font-bold">
