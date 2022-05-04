@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { UniversalState } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
+import Multiselect from "multiselect-react-dropdown";
 const EditModal = ({ id }) => {
   const {
     editModal,
@@ -147,6 +148,15 @@ const EditModal = ({ id }) => {
       });
   };
 
+  // const defaultValuesFunction = () => {
+  //   options.map((item, index) =>
+  //     if (item.value.indexOf(taskList.map((task) => task)) > -1)  {
+  //     console.log()
+
+  //     }
+  //   );
+  // };
+
   return (
     <>
       <div className="flex justify-center items-center w-full h-screen">
@@ -194,7 +204,7 @@ const EditModal = ({ id }) => {
               />
             </div>
 
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <div className="mb-1 w-full">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -218,7 +228,27 @@ const EditModal = ({ id }) => {
                   ))}
                 </select>
               </div>
-            </div>
+            </div> */}
+
+            {/* <div className="flex justify-center">
+              <div className="mb-2 w-full">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="empName"
+                >
+                  Employee Names
+                </label>
+                <Multiselect
+                  displayValue="value"
+                  options={options}
+                  // defaultValue={taskList.empName}
+                  // selectedValues={defaultValuesFunction}
+                  optionLabel="label"
+                  // onSelect={selectHandler}
+                />
+              </div>
+            </div> */}
+
             <div className="flex justify-center">
               <div className="mb-1 w-full">
                 <label

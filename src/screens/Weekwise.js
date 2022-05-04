@@ -243,7 +243,12 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
                     );
                   })}
                   <div className="bg-gray-50 mt-[15px] mx-1 h-10 text-black mr-2 flex justify-center items-center">
-                    <p className="text-sm font-bold">{item?.empName}</p>
+                    {/* {item?.empName.map((itemm, index) => {
+                      return <p className="text-sm font-bold">{itemm}</p>
+                    })} */}
+                    <p className="text-sm font-bold">
+                      {item?.empName.join(", ")}
+                    </p>
                   </div>
                 </React.Fragment>
               );

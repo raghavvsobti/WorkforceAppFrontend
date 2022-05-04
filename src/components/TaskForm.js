@@ -9,7 +9,6 @@ const TaskForm = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [empName, setEmpName] = useState("Raghav");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
@@ -43,7 +42,8 @@ const TaskForm = () => {
     },
   ];
 
-  const [empArray, setEmpArray] = useState(options);
+  const [selectedUser, setSelectedUser] = useState([]);
+  // const [selectedUser, setSelectedUser] = useState(null);
 
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
@@ -60,7 +60,7 @@ const TaskForm = () => {
       credentials: "include",
       body: JSON.stringify({
         name: name.toString(),
-        empName: empName.toString(),
+        empName: selectedUser,
         description: description.toString(),
         startDate: startDate,
         endDate: endDate,
@@ -79,8 +79,12 @@ const TaskForm = () => {
       });
   };
 
-  // const employeeArray = [];
-  console.log(empArray);
+  console.log(selectedUser);
+
+  const selectHandler = (e) => {
+    setSelectedUser(Array.isArray(e) ? e.map((x) => x.value) : []);
+    console.log(JSON.stringify(selectedUser));
+  };
 
   return (
     <>
@@ -128,7 +132,7 @@ const TaskForm = () => {
               />
             </div>
 
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <div className="mb-1 w-full">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -139,8 +143,8 @@ const TaskForm = () => {
                 <select
                   name="empName"
                   value={empName}
-                  // multiple
                   onChange={(e) => setEmpName(e.target.value)}
+                  options={options}
                   className="form-select form-select-lg mb-3 appearance-none block w-full px-3 py-1 text-md font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none form-multiselect"
                   placeholder="Select Employees"
                 >
@@ -159,12 +163,12 @@ const TaskForm = () => {
                   ))}
                 </select>
               </div>
-            </div>
+            </div> */}
 
             {/* multiselect dropdown starts here */}
 
             <div className="flex justify-center">
-              <div className="mb-1 w-full">
+              <div className="mb-2 w-full">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="empName"
@@ -172,11 +176,10 @@ const TaskForm = () => {
                   Employee Names
                 </label>
                 <Multiselect
-                  options={empArray}
-                  displayValue="label"
-                  // disablePreSelectedValues={true}
-                  closeIcon="close"
-                  onSelect={() => setEmpArray(this.selectedValues)}
+                  displayValue="value"
+                  options={options}
+                  optionLabel="label"
+                  onSelect={selectHandler}
                 />
               </div>
             </div>

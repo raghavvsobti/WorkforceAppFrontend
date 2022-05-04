@@ -88,7 +88,7 @@ const Day = ({ day, month, tasks, date }) => {
                     {console.log(tasks?.index)}
                     <p className="font-bold">
                       {itemm?.workingDays[0] === date.toLocaleDateString()
-                        ? itemm?.empName
+                        ? itemm?.empName.join(", ")
                         : ""}
                     </p>
                     <p className="mx-1 font-bold">

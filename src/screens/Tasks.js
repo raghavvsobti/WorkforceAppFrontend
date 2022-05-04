@@ -55,7 +55,12 @@ const Tasks = () => {
       width: 170,
       renderCell: (params) => <RowButton rowParams={params} />,
     },
-    { field: "empName", headerName: "Employee Name", width: 150 },
+    {
+      field: "empName",
+      headerName: "Employee Name",
+      width: 150,
+      valueGetter: (params) => params.row.empName.join(", "),
+    },
     { field: "name", headerName: "Name", width: 150 },
 
     {
