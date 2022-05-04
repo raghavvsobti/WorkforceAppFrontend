@@ -28,14 +28,17 @@ const Login = ({ mode, setMode }) => {
       response
         .json()
         .then((data) => {
-          console.log(response);
-          console.log("Success", data);
-          localStorage.setItem("token", data.jwt);
-          localStorage.setItem("user", data.user?.name);
-          localStorage.setItem("userId", data.user?._id);
-          setUser(data.user);
-          setIsLoggedIn(true);
-          navigate("/workforce");
+          if (data.message === "success") {
+            console.log(response);
+            console.log("Success", data);
+            localStorage.setItem("token", data.jwt);
+            localStorage.setItem("user", data.user?.name);
+            localStorage.setItem("userRole", data.user?.role);
+            localStorage.setItem("userId", data.user?._id);
+            setUser(data.user);
+            setIsLoggedIn(true);
+            navigate("/workforce");
+          }
         })
         .catch((error) => {
           console.error("Error: ", error);

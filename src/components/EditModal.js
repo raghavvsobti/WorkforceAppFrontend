@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { UniversalState } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
-import Multiselect from "multiselect-react-dropdown";
+// import Multiselect from "multiselect-react-dropdown";
 const EditModal = ({ id }) => {
   const {
     editModal,
@@ -63,32 +63,32 @@ const EditModal = ({ id }) => {
     // eslint-disable-next-line
   }, [editModal]);
 
-  const options = [
-    {
-      label: "Raghav",
-      value: "Raghav",
-    },
-    {
-      label: "Daksh",
-      value: "Daksh",
-    },
-    {
-      label: "Somesh",
-      value: "Somesh",
-    },
-    {
-      label: "Paarth",
-      value: "Paarth",
-    },
-    {
-      label: "John",
-      value: "John",
-    },
-    {
-      label: "David",
-      value: "David",
-    },
-  ];
+  // const options = [
+  //   {
+  //     label: "Raghav",
+  //     value: "Raghav",
+  //   },
+  //   {
+  //     label: "Daksh",
+  //     value: "Daksh",
+  //   },
+  //   {
+  //     label: "Somesh",
+  //     value: "Somesh",
+  //   },
+  //   {
+  //     label: "Paarth",
+  //     value: "Paarth",
+  //   },
+  //   {
+  //     label: "John",
+  //     value: "John",
+  //   },
+  //   {
+  //     label: "David",
+  //     value: "David",
+  //   },
+  // ];
   const stats = [
     {
       label: "Pending",
@@ -110,7 +110,7 @@ const EditModal = ({ id }) => {
 
   const [name, setName] = useState(taskList?.name);
   const [description, setDescription] = useState(taskList?.description);
-  const [empName, setEmpName] = useState(taskList?.empName);
+  const [empName] = useState(taskList?.empName);
   const [startDate, setStartDate] = useState("");
   // new Date(taskList?.startDate).toLocaleDateString()
   const [endDate, setEndDate] = useState("");

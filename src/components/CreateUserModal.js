@@ -8,19 +8,24 @@ const CreateUserModal = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
+  const userId = localStorage.getItem("userId");
+
+  const userRole = localStorage.getItem("userRole");
+
   const submitHandler = async (e) => {
     console.log(email, password, name);
     e.preventDefault();
-    await fetch("http://localhost:8000/auth/register", {
+    await fetch("http://localhost:8000/auth/create-member", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
       body: JSON.stringify({
-        name: email.toString(),
+        name: name.toString(),
         email: email.toString(),
         password: password.toString(),
+        createdBy: userId,
       }),
     })
       .then((response) => {
@@ -32,6 +37,34 @@ const CreateUserModal = () => {
         console.error("Error: ", error);
       });
   };
+
+  const adminSubmitHandler = async (e) => {
+    console.log(email, password, name);
+    e.preventDefault();
+    await fetch("http://localhost:8000/auth/create-member", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        name: name.toString(),
+        email: email.toString(),
+        password: password.toString(),
+        createdBy: userId,
+        role: "admin",
+      }),
+    })
+      .then((response) => {
+        console.log(response);
+        setUserModal(false);
+        // navigate("/auth");
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  };
+
   return (
     <div>
       <div className="relative flex justify-center items-center w-full h-screen">
@@ -40,7 +73,9 @@ const CreateUserModal = () => {
             <h1 className="text-2xl">Create User</h1>
           </div>
           <form
-            onSubmit={submitHandler}
+            onSubmit={
+              userRole === "superadmin" ? adminSubmitHandler : submitHandler
+            }
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
           >
             <div className="mb-4">

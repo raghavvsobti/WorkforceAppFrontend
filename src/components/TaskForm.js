@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UniversalState } from "../context/StateProvider";
 import { colors } from "../utils/colors";
@@ -14,42 +14,42 @@ const TaskForm = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
-
-  const options = [
-    {
-      label: "Raghav",
-      value: "Raghav",
-    },
-    {
-      label: "Daksh",
-      value: "Daksh",
-    },
-    {
-      label: "Somesh",
-      value: "Somesh",
-    },
-    {
-      label: "Paarth",
-      value: "Paarth",
-    },
-    {
-      label: "John",
-      value: "John",
-    },
-    {
-      label: "David",
-      value: "David",
-    },
-  ];
+  const [options, setOptions] = useState();
 
   const [selectedUser, setSelectedUser] = useState([]);
-  // const [selectedUser, setSelectedUser] = useState(null);
 
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
 
+  const fetchCreatedMembers = async () => {
+    await fetch(`http://localhost:8000/auth/${userId}/members`, {
+      credentials: "include",
+      headers: {
+        Authorization: `${token}`,
+      },
+    }).then((response) =>
+      response
+        .json()
+        .then((data) => {
+          setOptions(
+            data.map((item, index) => ({
+              // index: index + 1,
+              ...item,
+            }))
+          );
+        })
+        .catch((error) => {
+          console.error("Error: ", error);
+        })
+    );
+  };
+
+  useEffect(() => {
+    fetchCreatedMembers();
+    // eslint-disable-next-line
+  }, []);
+
   const submitHandler = async (e) => {
-    // console.log(name, description, empName, startDate, endDate);
     e.preventDefault();
     await fetch("http://localhost:8000/task/create", {
       method: "POST",
@@ -70,7 +70,6 @@ const TaskForm = () => {
       }),
     })
       .then((response) => {
-        // console.log(response);
         setTaskModal(false);
         navigate("/workforce/tasks");
       })
@@ -79,11 +78,8 @@ const TaskForm = () => {
       });
   };
 
-  console.log(selectedUser);
-
   const selectHandler = (e) => {
     setSelectedUser(Array.isArray(e) ? e.map((x) => x.value) : []);
-    console.log(JSON.stringify(selectedUser));
   };
 
   return (
@@ -132,57 +128,27 @@ const TaskForm = () => {
               />
             </div>
 
-            {/* <div className="flex justify-center">
-              <div className="mb-1 w-full">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="empName"
-                >
-                  Employee
-                </label>
-                <select
-                  name="empName"
-                  value={empName}
-                  onChange={(e) => setEmpName(e.target.value)}
-                  options={options}
-                  className="form-select form-select-lg mb-3 appearance-none block w-full px-3 py-1 text-md font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none form-multiselect"
-                  placeholder="Select Employees"
-                >
-                  <option value="none" disabled>
-                    Select an Option
-                  </option>
-
-                  {options.map((option, index) => (
-                    <option
-                      key={index}
-                      value={option.value}
-                      // onClick={() => employeeArray?.push("label")}
-                    >
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div> */}
-
             {/* multiselect dropdown starts here */}
 
-            <div className="flex justify-center">
-              <div className="mb-2 w-full">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="empName"
-                >
-                  Employee Names
-                </label>
-                <Multiselect
-                  displayValue="value"
-                  options={options}
-                  optionLabel="label"
-                  onSelect={selectHandler}
-                />
+            {options?.length > 0 && (
+              <div className="flex justify-center">
+                <div className="mb-2 w-full">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="empName"
+                  >
+                    Employee
+                  </label>
+                  <Multiselect
+                    displayValue="name"
+                    options={options}
+                    optionLabel="name"
+                    onSelect={selectHandler}
+                    placeholder="Select Employee"
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="md:flex md:items-center">
               <div className="md:w-2/4 md:mr-1">

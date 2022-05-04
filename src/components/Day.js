@@ -15,8 +15,6 @@ const Day = ({ day, month, tasks, date }) => {
     }
   });
 
-  console.log(colors);
-
   const getCurrentClass = () => {
     return day === new Date().getDate() && month === new Date().getMonth()
       ? "bg-black text-white rounded-full w-7"
@@ -44,9 +42,6 @@ const Day = ({ day, month, tasks, date }) => {
     .map((itemm) => {
       return itemm;
     });
-
-  console.log(date.getDate());
-  console.log(tasks);
 
   return (
     <>
@@ -85,7 +80,6 @@ const Day = ({ day, month, tasks, date }) => {
                     }]`}
                     key={index}
                   >
-                    {console.log(tasks?.index)}
                     <p className="font-bold">
                       {itemm?.workingDays[0] === date.toLocaleDateString()
                         ? itemm?.empName.join(", ")
