@@ -1,4 +1,6 @@
+import Tippy from "@tippyjs/react";
 import { colors } from "../utils/colors";
+import TaskTooltip from "./TaskTooltip";
 
 const Day = ({ day, month, tasks, date }) => {
   const d1 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -62,40 +64,52 @@ const Day = ({ day, month, tasks, date }) => {
           <div className="flex-1 cursor-pointer h-max-42 text-left text-sm">
             {checker.length !== 0 &&
               checker.map((itemm, index) => {
-                // before
-                // className={`${
-                //   itemm?.workingDays[0] === date.toLocaleDateString()
-                //     ? `${newColors[index]} visible pl-1 flex flex-wrap justify-center text-center`
-                //     : `${newColors[index]} pl-1 flex justify-center text-center`
-                // }]`}
-
-                // after
-
                 return (
-                  <div
-                    className={`${
-                      itemm?.workingDays[0] === date.toLocaleDateString()
-                        ? `${itemm.color} visible pl-1 flex flex-wrap justify-center text-center`
-                        : `${itemm.color} flex justify-center text-center -pl-2`
-                    }]`}
+                  <Tippy
                     key={index}
+                    content={
+                      <TaskTooltip
+                        taskList={itemm}
+                        empName={itemm?.empName?.map((item2) => item2?.name)}
+                      />
+                    }
+                    // arrow={roundArrow}
+                    placement="bottom"
+                    flip={true}
+                    animation="fade"
+                    theme={"light"}
+                    delay={200}
+                    hideOnClick={true}
+                    trigger="click"
+                    touch={true}
+                    zIndex={9999}
+                    arrow={true}
+                    role="tooltip"
                   >
-                    <p className="font-bold">
-                      {itemm?.workingDays[0] === date.toLocaleDateString()
-                        ? itemm?.empName
-                            ?.map((item2, index) => item2?.name)
-                            ?.join(", ")
-                        : ""}
-                    </p>
-                    <p className="mx-1 font-bold">
-                      {itemm?.workingDays[0] === date.toLocaleDateString()
-                        ? ":"
-                        : ""}
-                    </p>
+                    <div
+                      className={`${
+                        itemm?.workingDays[0] === date.toLocaleDateString()
+                          ? `${itemm.color} visible pl-1 flex flex-wrap justify-center text-center`
+                          : `${itemm.color} flex justify-center text-center -pl-2`
+                      }]`}
+                    >
+                      <p className="font-bold">
+                        {itemm?.workingDays[0] === date.toLocaleDateString()
+                          ? itemm?.empName
+                              ?.map((item2) => item2?.name)
+                              ?.join(", ")
+                          : ""}
+                      </p>
+                      <p className="mx-1 font-bold">
+                        {itemm?.workingDays[0] === date.toLocaleDateString()
+                          ? ":"
+                          : ""}
+                      </p>
 
-                    {itemm?.name}
-                    {/* {index++} */}
-                  </div>
+                      {itemm?.name}
+                      {/* {index++} */}
+                    </div>
+                  </Tippy>
                 );
               })}
           </div>

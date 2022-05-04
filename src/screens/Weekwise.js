@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Options from "../components/Options";
 import { weeklyMonthsArray } from "../utils/index";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
+import TaskTooltip from "../components/TaskTooltip";
+// import { roundArrow } from "tippy.js";
 const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
   const [taskList, setTaskList] = useState([]);
 
@@ -71,6 +76,10 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
       return `hidden`;
     }
   };
+
+  const filteredArray = taskList?.filter((item) =>
+    secondRowArray?.flat()?.some((itemm) => item?.workingDays?.includes(itemm))
+  );
 
   console.log(taskList);
 
@@ -183,13 +192,8 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
           <div className="col-span-[0.5] "></div>
           {/* 2nd row ends here */}
           {/* here all the tasks array is getting mapped */}
-          {taskList
-            ?.filter((item) =>
-              secondRowArray
-                ?.flat()
-                ?.some((itemm) => item?.workingDays?.includes(itemm))
-            )
-            ?.map((item, index) => {
+          {filteredArray.length > 0 ? (
+            filteredArray.map((item, index) => {
               return (
                 <React.Fragment key={generateKey(item.id + Math.random())}>
                   <div
@@ -202,31 +206,53 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
                   {/* using currentMonth to fetch month dates */}
                   {currentMonth.map((monthItem) => {
                     return (
-                      <div
-                        key={generateKey(Date.now() + Math.random())}
-                        className={`bg-gray-50 mt-[15px] mx-1 h-10 text-black grid grid-cols-7 gap-0 text-center`}
+                      <Tippy
+                        content={
+                          <TaskTooltip
+                            taskList={item}
+                            empName={item?.empName}
+                          />
+                        }
+                        theme={"light"}
+                        placement="bottom"
+                        flip="true"
+                        animation="fade"
+                        delay={200}
+                        hideOnClick={true}
+                        trigger="click"
+                        touch={true}
+                        zIndex={9999}
+                        arrow={true}
+                        role="tooltip"
                       >
-                        {monthItem.map((dateItem, idx) => {
-                          return (
-                            <div
-                              key={generateKey(
-                                new Date().getTime() + idx + dateItem.toString()
-                              )}
-                              className="flex justify-center m-0 w-full"
-                            >
-                              <p
-                                className={`text-sm mx-0 font-semibold flex w-full flex-wrap ${checkerFunction(
-                                  item,
-                                  dateItem,
-                                  index
-                                )}`}
+                        <div
+                          key={generateKey(Date.now() + Math.random())}
+                          className={`bg-gray-50 mt-[15px] mx-1 h-10 cursor-pointer text-black grid grid-cols-7 gap-0 text-center`}
+                        >
+                          {monthItem.map((dateItem, idx) => {
+                            return (
+                              <div
+                                key={generateKey(
+                                  new Date().getTime() +
+                                    idx +
+                                    dateItem.toString()
+                                )}
+                                className="flex justify-center m-0 w-full"
                               >
-                                {new Date(dateItem.toString()).getDate()}
-                              </p>
-                            </div>
-                          );
-                        })}
-                      </div>
+                                <p
+                                  className={`text-sm mx-0 font-semibold flex w-full flex-wrap ${checkerFunction(
+                                    item,
+                                    dateItem,
+                                    index
+                                  )}`}
+                                >
+                                  {new Date(dateItem.toString()).getDate()}
+                                </p>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </Tippy>
                     );
                   })}
                   <div className="bg-gray-50 mt-[15px] mx-1 h-10 text-black mr-2 flex justify-center items-center">
@@ -236,7 +262,12 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
                   </div>
                 </React.Fragment>
               );
-            })}
+            })
+          ) : (
+            <div className="p-20 mt-20 flex justify-center col-span-7  ">
+              <p>No task has been assigned for this month..</p>
+            </div>
+          )}
 
           <div className="col-span-[0.5]"></div>
         </div>
