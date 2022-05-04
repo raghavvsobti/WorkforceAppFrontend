@@ -63,7 +63,7 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
     });
   });
 
-  const checkerFunction = (item, dateItem, index) => {
+  const checkerFunction = (item, dateItem) => {
     console.log(`${item.color}`);
     if (item?.workingDays?.find((el) => el === dateItem.toLocaleDateString())) {
       return `${item.color} text-transparent block`;
@@ -230,9 +230,6 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
                     );
                   })}
                   <div className="bg-gray-50 mt-[15px] mx-1 h-10 text-black mr-2 flex justify-center items-center">
-                    {/* {item?.empName.map((itemm, index) => {
-                      return <p className="text-sm font-bold">{itemm}</p>
-                    })} */}
                     <p className="text-sm font-bold">
                       {item?.empName.join(", ")}
                     </p>
@@ -240,14 +237,6 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
                 </React.Fragment>
               );
             })}
-
-          {/* {colors.map((item, index) => {
-            return (
-              <div key={index} className={`bg-${newColors[index]} w-64 h-64`}>
-                <p>Hello {index}</p>
-              </div>
-            );
-          })} */}
 
           <div className="col-span-[0.5]"></div>
         </div>

@@ -29,6 +29,8 @@ const DetailsModal = ({ id }) => {
     );
   };
 
+  const userId = localStorage.getItem("userId");
+
   useEffect(() => {
     if (openModal) {
       fetchCreatedTask();
@@ -40,7 +42,7 @@ const DetailsModal = ({ id }) => {
 
   const empName = taskList?.empName?.map((item, index) => item?.name);
 
-  console.log(empName);
+  // console.log(empName);
 
   return (
     <>
@@ -50,7 +52,11 @@ const DetailsModal = ({ id }) => {
             <h1 className="text-2xl">Task Details</h1>
           </div>
 
-          <div className="bg-white shadow-md rounded ">
+          <div
+            className={`bg-white shadow-md rounded ${
+              userId !== taskList?.user ? "pb-[10px]" : ""
+            }`}
+          >
             <div className="px-8 pt-6">
               <div className="grid grid-cols-3">
                 <p className="text-md font-semibold">Task Name</p>
@@ -90,20 +96,26 @@ const DetailsModal = ({ id }) => {
               </div>
             </div>
             <div className="flex items-center justify-between w-full mt-2 p-[1px]">
-              <button
-                className="bg-blue-500 w-full m-[15px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="button"
-                onClick={editHandler}
-              >
-                Edit
-              </button>
+              {userId === taskList?.user && (
+                <button
+                  className="bg-blue-500 w-full m-[15px] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
+                  type="button"
+                  onClick={editHandler}
+                >
+                  Edit
+                </button>
+              )}
               <button
                 className="text-black hover:text-red-700"
                 type="button"
                 onClick={() => setOpenModal(false)}
               >
                 <svg
-                  className="h-8 w-8 fixed md:top-[252px] md:right-[33.5%] right-[60px] top-[230px]"
+                  className={`h-8 w-8 fixed  md:right-[33.5%] right-[60px]  ${
+                    userId === taskList?.user
+                      ? "top-[230px] md:top-[252px]"
+                      : "top-[280px]"
+                  } `}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
