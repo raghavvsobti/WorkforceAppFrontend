@@ -77,10 +77,10 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
   // var indexOfColors = Math.floor(Math.random() * 36);
 
   const checkerFunction = (item, dateItem, index) => {
-    console.log("color check", newColors[index], index);
-    console.log(`bg-${newColors[index]}`);
+    // console.log("color check", newColors[index], index);
+    console.log(`${item.color}`);
     if (item?.workingDays?.find((el) => el === dateItem.toLocaleDateString())) {
-      return `bg-${newColors[index]} text-transparent block`;
+      return `${item.color} text-transparent block`;
       // return `bg-green-300 text-transparent`;
     } else {
       return `hidden`;
