@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { BASE_URL } from "../constants";
 
 import Day from "./Day";
 import DayNames from "./DayNames";
