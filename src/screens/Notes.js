@@ -55,8 +55,6 @@ const Notes = () => {
     // eslint-disable-next-line
   }, [editNote, noteModal]);
 
-  console.log(notesList);
-
   return (
     <div>
       <Navbar />
