@@ -93,7 +93,7 @@ const Tasks = () => {
   const userId = localStorage.getItem("userId");
   const fetchCreatedTasks = async () => {
     setIsFetching(true);
-    await fetch(` ${BASE_URL}/task/all/${userId}`, {
+    await fetch(`${BASE_URL}/task/all/${userId}`, {
       credentials: "include",
       headers: {
         Authorization: `${token}`,

@@ -8,7 +8,8 @@ const EditNote = () => {
   const { setEditNote, setSelectedNote, selectedNote, user } = UniversalState();
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
-  const [setNoteList] = useState(null);
+  // eslint-disable-next-line
+  const [noteList, setNoteList] = useState(null);
 
   const token = localStorage.getItem("token");
 
@@ -46,9 +47,7 @@ const EditNote = () => {
       response
         .json()
         .then((data) => {
-          //   console.log(response);
-          // console.log(data);
-          setNoteList(data);
+          // setNoteList(data);
         })
         .catch((error) => {
           console.error("Error: ", error);
@@ -69,7 +68,7 @@ const EditNote = () => {
   const userId = localStorage.getItem("userId");
 
   const deleteEntry = async () => {
-    await fetch(` ${BASE_URL}/${userId}/${selectedNote?.id}`, {
+    await fetch(`${BASE_URL}/note/${userId}/${selectedNote?.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
