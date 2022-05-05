@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { BASE_URL } from "../constants";
 import Day from "./Day";
 import DayNames from "./DayNames";
 
@@ -8,7 +9,7 @@ const Month = ({ month }) => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   const fetchCreatedTasks = async () => {
-    await fetch(`http://localhost:8000/task/all/${userId}`, {
+    await fetch(`${BASE_URL}/task/all/${userId}`, {
       credentials: "include",
       headers: {
         Authorization: `${token}`,

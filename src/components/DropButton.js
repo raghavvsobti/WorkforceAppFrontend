@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../constants";
 import { UniversalState } from "../context/StateProvider";
 
 const DropButton = () => {
@@ -12,7 +13,7 @@ const DropButton = () => {
 
   const token = localStorage.getItem("token");
   const logoutHandler = async () => {
-    await fetch("http://localhost:8000/auth/logout", {
+    await fetch(`${BASE_URL}/auth/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

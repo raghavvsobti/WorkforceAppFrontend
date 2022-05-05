@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { UniversalState } from "../context/StateProvider";
-
+import { BASE_URL } from "../constants";
 const Button = (props) => {
   const { isLoggedIn, setIsLoggedIn, setUser, setTaskModal, setUserModal } =
     UniversalState();
   const navigate = useNavigate();
 
   const logoutHandler = async () => {
-    await fetch("http://localhost:8000/auth/logout", {
+    await fetch(`${BASE_URL}/auth/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

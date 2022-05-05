@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { UniversalState } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../constants";
 const Login = ({ mode, setMode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +13,7 @@ const Login = ({ mode, setMode }) => {
   const submitForm = async (e) => {
     console.log(email, password);
     e.preventDefault();
-    await fetch("http://localhost:8000/auth/login", {
+    await fetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
