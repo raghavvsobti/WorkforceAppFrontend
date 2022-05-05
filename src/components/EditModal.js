@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { UniversalState } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../constants";
 
 // import Multiselect from "multiselect-react-dropdown";
 const EditModal = ({ id }) => {
@@ -22,7 +23,7 @@ const EditModal = ({ id }) => {
   const userId = localStorage.getItem("userId");
 
   const deleteEntry = async () => {
-    await fetch(` ${process.env.BASE_URL}/task/${userId}/${id}`, {
+    await fetch(` ${BASE_URL}/task/${userId}/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +41,7 @@ const EditModal = ({ id }) => {
       });
   };
   const fetchCreatedTask = async () => {
-    await fetch(` ${process.env.BASE_URL}/task/${id}`, {
+    await fetch(` ${BASE_URL}/task/${id}`, {
       credentials: "include",
       headers: { Authorization: `${token}` },
     }).then((response) =>
@@ -122,7 +123,7 @@ const EditModal = ({ id }) => {
   const submitHandler = async (e) => {
     // console.log(name, description, empName, startDate, endDate);
     e.preventDefault();
-    await fetch(` ${process.env.BASE_URL}/task/${id}`, {
+    await fetch(` ${BASE_URL}/task/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

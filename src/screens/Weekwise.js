@@ -6,6 +6,7 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import TaskTooltip from "../components/TaskTooltip";
 import { UniversalState } from "../context/StateProvider";
+import { BASE_URL } from "../constants";
 
 const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
   const [taskList, setTaskList] = useState([]);
@@ -15,7 +16,7 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
   const userId = localStorage.getItem("userId");
   const fetchCreatedTasks = async () => {
     setIsFetching(true);
-    await fetch(` ${process.env.BASE_URL}/task/all/${userId}`, {
+    await fetch(` ${BASE_URL}/task/all/${userId}`, {
       credentials: "include",
       headers: {
         Authorization: `${token}`,

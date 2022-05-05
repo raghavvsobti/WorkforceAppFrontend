@@ -13,7 +13,7 @@ const DropButton = () => {
 
   const token = localStorage.getItem("token");
   const logoutHandler = async () => {
-    await fetch(` ${process.env.BASE_URL}/auth/logout`, {
+    await fetch(` ${BASE_URL}/auth/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

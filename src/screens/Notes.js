@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import Note from "../components/Note";
 import Sidebar from "../components/Sidebar";
 import TaskForm from "../components/TaskForm";
+import { BASE_URL } from "../constants";
 
 import { UniversalState } from "../context/StateProvider";
 
@@ -25,7 +26,7 @@ const Notes = () => {
   const userId = localStorage.getItem("userId");
 
   const fetchCreatedNotes = async () => {
-    await fetch(` ${process.env.BASE_URL}/note/all/${userId}`, {
+    await fetch(` ${BASE_URL}/note/all/${userId}`, {
       credentials: "include",
       headers: {
         Authorization: `${token}`,

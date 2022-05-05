@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { UniversalState } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../constants";
 
 const EditNote = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const EditNote = () => {
   const submitHandler = async (e) => {
     // console.log(name, description, empName, startDate, endDate);
     e.preventDefault();
-    await fetch(` ${process.env.BASE_URL}/note/${selectedNote?.id}`, {
+    await fetch(` ${BASE_URL}/note/${selectedNote?.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +39,7 @@ const EditNote = () => {
   };
 
   const fetchCreatedNote = async () => {
-    await fetch(` ${process.env.BASE_URL}/note/${selectedNote?.id}`, {
+    await fetch(` ${BASE_URL}/note/${selectedNote?.id}`, {
       credentials: "include",
       headers: { Authorization: `${token}` },
     }).then((response) =>
@@ -68,7 +69,7 @@ const EditNote = () => {
   const userId = localStorage.getItem("userId");
 
   const deleteEntry = async () => {
-    await fetch(` ${process.env.BASE_URL}/${userId}/${selectedNote?.id}`, {
+    await fetch(` ${BASE_URL}/${userId}/${selectedNote?.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

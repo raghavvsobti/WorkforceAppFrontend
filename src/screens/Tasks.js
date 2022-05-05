@@ -7,6 +7,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import DetailsModal from "../components/DetailsModal";
 import EditModal from "../components/EditModal";
 import CreateUserModal from "../components/CreateUserModal";
+import { BASE_URL } from "../constants";
 
 const Tasks = () => {
   const {
@@ -92,7 +93,7 @@ const Tasks = () => {
   const userId = localStorage.getItem("userId");
   const fetchCreatedTasks = async () => {
     setIsFetching(true);
-    await fetch(` ${process.env.BASE_URL}/task/all/${userId}`, {
+    await fetch(` ${BASE_URL}/task/all/${userId}`, {
       credentials: "include",
       headers: {
         Authorization: `${token}`,

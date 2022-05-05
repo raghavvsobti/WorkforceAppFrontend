@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BASE_URL } from "../constants";
 
 import { UniversalState } from "../context/StateProvider";
 
@@ -13,7 +14,7 @@ const DetailsModal = ({ id }) => {
 
   const token = localStorage.getItem("token");
   const fetchCreatedTask = async () => {
-    await fetch(` ${process.env.BASE_URL}/task/${id}`, {
+    await fetch(` ${BASE_URL}/task/${id}`, {
       credentials: "include",
       headers: {
         Authorization: `${token}`,

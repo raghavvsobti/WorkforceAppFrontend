@@ -9,7 +9,7 @@ const Month = ({ month }) => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   const fetchCreatedTasks = async () => {
-    await fetch(` ${process.env.BASE_URL}/task/all/${userId}`, {
+    await fetch(` ${BASE_URL}/task/all/${userId}`, {
       credentials: "include",
       headers: {
         Authorization: `${token}`,
