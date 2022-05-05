@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BASE_URL } from "../constants";
+
 import { UniversalState } from "../context/StateProvider";
 
 const CreateUserModal = () => {
@@ -17,7 +17,7 @@ const CreateUserModal = () => {
   const submitHandler = async (e) => {
     console.log(email, password, name);
     e.preventDefault();
-    await fetch(`${BASE_URL}/auth/create-member`, {
+    await fetch(` ${process.env.BASE_URL}/auth/create-member`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const CreateUserModal = () => {
   const adminSubmitHandler = async (e) => {
     console.log(email, password, name);
     e.preventDefault();
-    await fetch(`${BASE_URL}/auth/create-member`, {
+    await fetch(` ${process.env.BASE_URL}/auth/create-member`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

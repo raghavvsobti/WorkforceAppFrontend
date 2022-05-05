@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { UniversalState } from "../context/StateProvider";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../constants";
 
 const CreateNote = () => {
   const { setNoteModal } = UniversalState();
@@ -17,7 +16,7 @@ const CreateNote = () => {
   const submitHandler = async (e) => {
     // console.log(name, description, empName, startDate, endDate);
     e.preventDefault();
-    await fetch(`${BASE_URL}/note/create`, {
+    await fetch(` ${process.env.BASE_URL}/note/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

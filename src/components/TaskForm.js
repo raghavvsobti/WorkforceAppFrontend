@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { UniversalState } from "../context/StateProvider";
 import { colors } from "../utils/colors";
 import { Multiselect } from "multiselect-react-dropdown";
-import { BASE_URL } from "../constants";
 
 const TaskForm = () => {
   const { setTaskModal } = UniversalState();
@@ -23,7 +22,7 @@ const TaskForm = () => {
   const userId = localStorage.getItem("userId");
 
   const fetchCreatedMembers = async () => {
-    await fetch(`${BASE_URL}/auth/${userId}/members`, {
+    await fetch(` ${process.env.BASE_URL}/auth/${userId}/members`, {
       credentials: "include",
       headers: {
         Authorization: `${token}`,
@@ -52,7 +51,7 @@ const TaskForm = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await fetch(`${BASE_URL}/task/create`, {
+    await fetch(` ${process.env.BASE_URL}/task/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
