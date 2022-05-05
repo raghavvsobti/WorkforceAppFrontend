@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import CreateUserModal from "../components/CreateUserModal";
-
 import DayWise from "../components/DayWise";
 import Navbar from "../components/Navbar";
-
 import Sidebar from "../components/Sidebar";
 import TaskForm from "../components/TaskForm";
 import { UniversalState } from "../context/StateProvider";
@@ -19,7 +17,6 @@ const Workforce = () => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex, setCurrentMonth]);
 
-  // bg-gradient-to-r from-indigo-500 to-sky-500
   return (
     <div className="w-full h-screen bg-white pb-20 overscroll-contain z-1">
       <Navbar />

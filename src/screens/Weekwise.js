@@ -5,11 +5,12 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import TaskTooltip from "../components/TaskTooltip";
-// import { roundArrow } from "tippy.js";
+import { UniversalState } from "../context/StateProvider";
+
 const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
   const [taskList, setTaskList] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
-
+  const { taskModal } = UniversalState();
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   const fetchCreatedTasks = async () => {
@@ -39,10 +40,12 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
   };
 
   useEffect(() => {
-    fetchCreatedTasks();
+    if (taskModal === false) {
+      fetchCreatedTasks();
+    }
 
     // eslint-disable-next-line
-  }, [monthIndex]);
+  }, [monthIndex, taskModal]);
 
   function getFormat(today) {
     var dd = today.getDate();
