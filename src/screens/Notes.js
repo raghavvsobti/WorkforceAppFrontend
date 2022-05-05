@@ -47,9 +47,13 @@ const Notes = () => {
   };
 
   useEffect(() => {
-    fetchCreatedNotes();
+    if (editNote === false) {
+      fetchCreatedNotes();
+    } else if (noteModal === false) {
+      fetchCreatedNotes();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [editNote, noteModal]);
 
   console.log(notesList);
 

@@ -103,7 +103,8 @@ const Tasks = () => {
             data.map((item, index) => ({
               index: index + 1,
               ...item,
-              empName: item.empName.map((item, index) => item.name),
+              empName: item.empName.map((item) => item.name),
+              employees: item.empName.map((item) => item.name).join(", "),
             }))
           );
         })
@@ -114,16 +115,19 @@ const Tasks = () => {
   };
 
   useEffect(() => {
-    fetchCreatedTasks();
+    if (taskModal === false) {
+      fetchCreatedTasks();
+    } else if (editModal === false) {
+      fetchCreatedTasks();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [taskModal, editModal]);
 
   const [filters, setFilters] = useState({
     status: "",
-    empName: "",
+    // empName: employees,
+    employees: "",
   });
-
-  console.log(taskList);
 
   // useMemo is used to only calculate a value when dependencies change.
   // Here, the value of filteredList is recalculated when either of the variables filters, employee name, status,startDate, endDate change
@@ -217,28 +221,28 @@ const Tasks = () => {
                   <div className="flex justify-center">
                     <label
                       className="block text-gray-700 text-sm font-bold mb-2"
-                      htmlFor="empName"
+                      htmlFor="employees"
                     >
                       Employee Name
                     </label>
                   </div>
                   <select
-                    name="empName"
-                    value={filters.empName}
+                    name="employees"
+                    value={filters.employees}
                     onChange={(e) =>
                       setFilters({
                         ...filters,
-                        empName: e.target.value,
+                        employees: e.target.value,
                       })
                     }
                     className="form-select form-select-lg mb-3 appearance-none block w-full px-3 py-1 text-md font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   >
                     <option value="">Clear</option>
                     {taskList &&
-                      [...new Set(taskList.map((item) => item.empName))].map(
-                        (empName, index) => (
-                          <option key={index} value={empName}>
-                            {empName}
+                      [...new Set(taskList.map((item) => item.employees))].map(
+                        (employees, index) => (
+                          <option key={index} value={employees}>
+                            {employees}
                           </option>
                         )
                       )}

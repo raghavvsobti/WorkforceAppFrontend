@@ -61,8 +61,8 @@ const EditNote = () => {
   }, []);
 
   const deleteNote = () => {
-    setEditNote(false);
     deleteEntry();
+    setEditNote(false);
   };
 
   const userId = localStorage.getItem("userId");

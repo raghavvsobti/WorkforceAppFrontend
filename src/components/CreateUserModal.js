@@ -7,6 +7,7 @@ const CreateUserModal = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
 
   const userId = localStorage.getItem("userId");
 
@@ -52,7 +53,7 @@ const CreateUserModal = () => {
         email: email.toString(),
         password: password.toString(),
         createdBy: userId,
-        role: "admin",
+        role: role,
       }),
     })
       .then((response) => {
@@ -112,7 +113,7 @@ const CreateUserModal = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="mb-2">
+            <div className="mb-1">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="password"
@@ -129,6 +130,29 @@ const CreateUserModal = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            {userRole === "superadmin" && (
+              <div className="flex justify-center">
+                <div className="mb-1 w-full">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="role"
+                  >
+                    Role
+                  </label>
+                  <select
+                    name="role"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    className="form-select form-select-lg mb-3 appearance-none block w-full px-3 py-1 text-md font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  >
+                    <option disabled>Select an Option</option>
+                    <option value="superadmin">Admin</option>
+                    <option value="admin">Manager</option>
+                    <option value="user">Member</option>
+                  </select>
+                </div>
+              </div>
+            )}
             <div className="">
               <button
                 className=" w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -138,10 +162,14 @@ const CreateUserModal = () => {
               </button>
               <button
                 onClick={() => setUserModal(false)}
-                className=" font-bold text-lg text-black hover:text-blue-800"
+                className=" font-bold text-lg text-black hover:text-red-800"
               >
                 <svg
-                  className="h-8 w-8 fixed md:top-[195px] md:right-[33.5%] right-[60px] top-[195px]"
+                  className={`h-8 w-8 fixed  ${
+                    userRole === "superadmin"
+                      ? "md:top-[157px] md:right-[34%] right-[60px] top-[157px]"
+                      : "md:top-[195px] md:right-[33.5%] right-[60px] top-[195px]"
+                  }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"

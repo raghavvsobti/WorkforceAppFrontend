@@ -69,19 +69,16 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
   });
 
   const checkerFunction = (item, dateItem) => {
-    console.log(`${item.color}`);
     if (item?.workingDays?.find((el) => el === dateItem.toLocaleDateString())) {
       return `${item.color} text-transparent block`;
     } else {
-      return `hidden`;
+      return `hidden disabled`;
     }
   };
 
   const filteredArray = taskList?.filter((item) =>
     secondRowArray?.flat()?.some((itemm) => item?.workingDays?.includes(itemm))
   );
-
-  console.log(taskList);
 
   const days = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -207,6 +204,7 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
                   {currentMonth.map((monthItem) => {
                     return (
                       <Tippy
+                        key={generateKey(Date.now() + Math.random())}
                         content={
                           <TaskTooltip
                             taskList={item}
@@ -226,7 +224,6 @@ const Weekwise = ({ currentMonth, monthIndex, setMonthIndex }) => {
                         role="tooltip"
                       >
                         <div
-                          key={generateKey(Date.now() + Math.random())}
                           className={`bg-gray-50 mt-[15px] mx-1 h-10 cursor-pointer text-black grid grid-cols-7 gap-0 text-center`}
                         >
                           {monthItem.map((dateItem, idx) => {

@@ -69,11 +69,11 @@ const Day = ({ day, month, tasks, date }) => {
                     key={index}
                     content={
                       <TaskTooltip
+                        className="shadow-xl"
                         taskList={itemm}
                         empName={itemm?.empName?.map((item2) => item2?.name)}
                       />
                     }
-                    // arrow={roundArrow}
                     placement="bottom"
                     flip={true}
                     animation="fade"
