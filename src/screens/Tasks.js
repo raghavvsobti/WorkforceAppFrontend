@@ -342,7 +342,12 @@ const Tasks = () => {
                 </div>
               </div>
               {taskList !== null && (
-                <DataGrid columns={columns} rows={filteredList} autoHeight />
+                <DataGrid
+                  columns={columns}
+                  rows={filteredList}
+                  autoHeight
+                  // rowsPerPageOptions={[1, 1, 1]}
+                />
               )}
             </div>
           </div>

@@ -34,7 +34,6 @@ const Day = ({ day, month, tasks, date }) => {
       // if(JSON.stringify(item?.workingDays).includes(date?.toLocaleDateString()))
       if (item?.workingDays?.find((el) => el === date?.toLocaleDateString())) {
         return item;
-      } else {
       }
       return "ok";
     });

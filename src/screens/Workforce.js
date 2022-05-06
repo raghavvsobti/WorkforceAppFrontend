@@ -17,6 +17,8 @@ const Workforce = () => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex, setCurrentMonth]);
 
+  console.log(currentMonth);
+
   return (
     <div className="w-full h-screen bg-white pb-20 overscroll-contain z-1">
       <Navbar />
